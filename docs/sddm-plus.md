@@ -9,8 +9,6 @@
 - [getTableWhereNameEquals()](#getTableWhereNameEquals)
 - [getTablesWhereNameLike()](#getTablesWhereNameLike)
 - [getTablesWhereNameNotLike()](#getTablesWhereNameNotLike)
-- [addPrefixToTables()](#addPrefixToTables)
-- [dropPrefixFromTables()](#dropPrefixFromTables)
 
 ### Table methods
 - [Table.getColumns()](#getColumns)
@@ -179,57 +177,6 @@ matcher | A String or List
 *return* | A List of Table objects
 
 [Top](#top)
-
-<a name="addPrefixToTables"/>
-
-## addPrefixToTables()
-
-<p>
-<p>Adds a common prefix to all tables in the model that do not already have the prefix.</p>
-<br/>
-<p>The prefix can optionally be provided as an argument to the method.</p>
-<p>If the prefix is not provided, the user will be prompted.</p>
-<p>If the prefix does not end with "_" it will be appended to the prefix.</p>
-<p>If the table already has the prefix, it is not added again.</p>
-</p>
-
-### Syntax
-```groovy
-addPrefixToTables (String prefix='')
-```
-
-### Parameters
-Name | Description
---- | ---
-prefix | Optional prefix to add to all tables
-
-[Top](#top)
-
-
-<a name="dropPrefixFromTables"/>
-
-## dropPrefixFromTables()
-
-<p>
-<p> * Removes a common prefix from all tables in the model that have the prefix.</p>
-<br/>
-<p>The prefix can optionally be provided as an argument to the method.</p>
-<p>If the prefix is not provided, the user will be prompted.</p>
-<p> * Unlike the method to add a prefix, this method will not modify the prefix provided in any way.</p>
-</p>
-
-### Syntax
-```groovy
-dropPrefixFromTables (String prefix='')
-```
-
-### Parameters
-Name | Description
---- | ---
-prefix | Optional prefix to remove from all tables
-
-[Top](#top)
-
 
 
 <a name="getColumns"/>
