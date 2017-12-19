@@ -410,12 +410,6 @@ oracle.dbtools.crest.model.design.relational.Table.metaClass {
     }
   }
 
-  /*
-  addPrefix
-  got ConcurrentModificationException
-   it is not generally permissible for one thread to modify a Collection while another thread is iterating over it
-  */
-
 } // end of Table metaclass definition
 
 oracle.dbtools.crest.model.design.relational.Column.metaClass {
