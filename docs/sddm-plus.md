@@ -17,8 +17,6 @@
 - [Table.getColumnsWhereNameNotLike()](#getColumnsWhereNameNotLike)
 - [Table.addColumn()](#addColumn)
 - [Table.dropColumn()](#dropColumn)
-- [Table.addAuditColumns()](#addAuditColumns)
-- [Table.dropAuditColumns()](#dropAuditColumns)
 - [Table.logProperties()](#logProperties)
 
 ### Column methods
@@ -177,7 +175,6 @@ matcher | A String or List
 *return* | A List of Table objects
 
 [Top](#top)
-
 
 <a name="getColumns"/>
 
@@ -338,68 +335,6 @@ Table.dropColumn(String colName)
 ```
 
 [Top](#top)
-
-<a name="addAuditColumns"/>
-
-## Table.addAuditColumns()
-
-<p>
-<p>Adds standard audit columns to all tables in the model that do not already have them.</p>
-<br/>
-<p>The audit columns are defined in the global array *auditCols*.</p>
-<p>To customize the audit column definitions, this array can be modifed within the user script before calling the method.</p>
-<p>The default column definitions look like this:</p>
-</p>
-
-```groovy
-auditCols = [[name:'USER_CREATED', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_CREATED', type:'Date', size:''],
-[name:'USER_MODIFIED', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_MODIFIED', type:'Date', size:'']]
-```
-
-### Syntax
-```groovy
-Table.addAuditColumns (auditCols)
-```
-### Parameters
-Name | Description
---- | ---
-auditCols | The array containing the definition of the audit columns
-
-[Top](#top)
-
-<a name="dropAuditColumns"/>
-
-## Table.dropAuditColumns()
-
-<p>
-<p>Removes standard audit columns to all tables in the model that already have them.</p>
-<br/>
-<p> The method looks only at the column name to determine if the column shold be dropped.</p>
-<p>The audit columns are defined in the global array *auditCols*.</p>
-<p>To customize the audit column definitions, this array can be modifed within the user script before calling the method.</p>
-<p>The default column definitions look like this:</p>
-</p>
-
-```groovy
-auditCols = [[name:'USER_CREATED', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_CREATED', type:'Date', size:''],
-[name:'USER_MODIFIED', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_MODIFIED', type:'Date', size:'']]
-```
-
-### Syntax
-```groovy
-Table.dropAuditColumns (auditCols)
-```
-### Parameters
-Name | Description
---- | ---
-auditCols | The array containing the definition of the audit columns
-
-[Top](#top)
-
 
 <a name="logProperties"/>
 
