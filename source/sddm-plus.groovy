@@ -1,8 +1,8 @@
 /*
  * sddm-plus
  * @author  David Schleis dschleis@gmail.com
- * @version 0.1
- * @date 20-Sep-2017
+ * @version 1.0.0
+ * @date 17-May-2018
  */
 
 import javax.swing.JOptionPane
@@ -36,7 +36,7 @@ import javax.swing.JFrame
   * @param message The message that is displayed in the log window
   */
 Void log(String message) {
-    def app = oracle.dbtools.crest.swingui.ApplicationView;
+    def app = oracle.dbtools.crest.swingui.ApplicationView
     app.log(message)
 }
 
@@ -412,6 +412,33 @@ oracle.dbtools.crest.model.design.relational.Table.metaClass {
 
 } // end of Table metaclass definition
 
+oracle.dbtools.crest.model.design.relational.TableView.metaClass {
+
+  /**
+   * Returns all columns of a tableView.
+   *
+   * @return List of ColumnView objects.
+   */
+  getColumns = {->
+    return delegate.columnViewSet.toArray()
+  }
+
+} // end of TableView metaclass definition
+
+oracle.dbtools.crest.model.design.logical.Entity.metaClass {
+
+  /**
+   * Returns all attriibutes of an Entity.
+   *
+   * @return List of Attribute objects.
+   */
+  getAttributes = {->
+    return delegate.attributeSet.toArray()
+  }
+
+} // end of Entity metaclass definition
+
+
 oracle.dbtools.crest.model.design.relational.Column.metaClass {
   logProperties { ->
     log("\n")
@@ -648,8 +675,34 @@ oracle.dbtools.crest.model.design.relational.Column.metaClass {
     log("----------------------------------------------------------------------------")
 
   }
+
+  /**
+   * Returns the data type of a column. Uppercase T version of getDatatypeString()
+   *
+   * @return String containing datatype of column.
+   */
+  getDataTypeString {->
+    delegate.getDatatypeString()
+  }
+
 }  // end of Column metaclass definition
 
+oracle.dbtools.crest.model.design.relational.ColumnView.metaClass {
+
+  /**
+   * Returns the data type of a column. LOWERcase T version of getDataTypeString()
+   *
+   * @return String containing datatype of columnView.
+   */
+  getDatatypeString {->
+    delegate.getDataTypeString()
+  }
+
+}  // end of ColumnView metaclass definition
+
+/**********************
+ * Table methods
+ *********************/
  /**
   * Returns a list of the table objects found in the current relational model.
   *
@@ -705,7 +758,126 @@ def getTablesWhereNameNotLike(matcher) {
   getThings(model.tableSet, matcher, true)
 }
 
+/**********************
+ * Table View methods
+ *********************/
+/**
+ * Returns a list of the table view objects found in the current relational model.
+ *
+ * @return List of Table View objects.
+ */
+def getViews() {
+  model.tableViewSet
+}
 
+/**
+ * Returns the table view with the given name (case insensitive) found in the current relational model.
+ *
+ * @param matcher A String that is the name of the view
+ * @return A Table View object.
+ */
+def getViewWhereNameEquals(String matcher) {
+  model.tableViewSet.getByName(matcher)
+}
+
+/**
+ * Returns a List of Table View objects from the current relational model that match the given matcher (case insensitive).
+ *
+ * This method compares the view names with the matcher and returns those table view
+ * objects that match.
+ *
+ * The matcher is case insensitive and recognizes wildcards of '*' and '%' at the beginning or end and can take several forms.
+ * A simple string: 'test'
+ * A string contining a list of comma-seperated values: 'abc, 123, *test'
+ * A Groovy List of strings: ['abc', '%123', 'test*']
+ *
+ * @param matcher A String or List
+ * @return List of Table View objects.
+ */
+def getViewsWhereNameLike(matcher) {
+  getThings(model.tableViewSet, matcher)
+}
+
+/**
+ * Returns a List of Table View objects from the current relational model that do not match the given matcher (case insensitive).
+ *
+ * This method compares the view names with the matcher and returns those table view
+ * objects that do not match.
+ *
+ * The matcher is case insensitive and recognizes wildcards of '*' and '%' at the beginning or end and can take several forms.
+ * A simple string: 'test'
+ * A string contining a list of comma-seperated values: 'abc, 123, *test'
+ * A Groovy List of strings: ['abc', '%123', 'test*']
+ *
+ * @param matcher A String or List
+ * @return List of Table View objects.
+ */
+def getViewsWhereNameNotLike(matcher) {
+  getThings(model.tableViewSet, matcher, true)
+}
+
+
+/**********************
+ * Entity methods
+ *********************/
+/**
+ * Returns a list of the entity objects found in the logical model.
+ *
+ * @return List of Entity objects.
+ */
+def getEntities() {
+  model.entitySet
+}
+
+/**
+ * Returns the entity with the given name (case insensitive) found in the  logical model.
+ *
+ * @param matcher A String that is the name of the entitySet
+ * @return an Entity object.
+ */
+def getEntityWhereNameEquals(String matcher) {
+  model.entitySet.getByName(matcher)
+}
+
+/**
+ * Returns a List of Entity objects from the current logical model that match the given matcher (case insensitive).
+ *
+ * This method compares the entity names with the matcher and returns those entities
+ * objects that match.
+ *
+ * The matcher is case insensitive and recognizes wildcards of '*' and '%' at the beginning or end and can take several forms.
+ * A simple string: 'test'
+ * A string contining a list of comma-seperated values: 'abc, 123, *test'
+ * A Groovy List of strings: ['abc', '%123', 'test*']
+ *
+ * @param matcher A String or List
+ * @return List of Table View objects.
+ */
+def getEntitiesWhereNameLike(matcher) {
+  getThings(model.entitySet, matcher)
+}
+
+/**
+ * Returns a List of Table View objects from the logical model that do not match the given matcher (case insensitive).
+ *
+ * This method compares the view names with the matcher and returns those table
+ * objects that do not match.
+ *
+ * The matcher is case insensitive and recognizes wildcards of '*' and '%' at the beginning or end and can take several forms.
+ * A simple string: 'test'
+ * A string contining a list of comma-seperated values: 'abc, 123, *test'
+ * A Groovy List of strings: ['abc', '%123', 'test*']
+ *
+ * @param matcher A String or List
+ * @return List of Table View objects.
+ */
+def getEntitiesWhereNameNotLike(matcher) {
+  getThings(model.entitySet, matcher, true)
+}
+
+/******************************************************************************
+*******************************************************************************
+******************************************************************************/
 
 /*!
  * Private method to return objects from a list based on whether they match
