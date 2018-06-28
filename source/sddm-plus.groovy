@@ -428,7 +428,7 @@ oracle.dbtools.crest.model.design.relational.TableView.metaClass {
 oracle.dbtools.crest.model.design.logical.Entity.metaClass {
 
   /**
-   * Returns all attriibutes of an Entity.
+   * Returns all attributes of an Entity.
    *
    * @return List of Attribute objects.
    */

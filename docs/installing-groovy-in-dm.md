@@ -8,11 +8,12 @@ SDDM allows scripts to be written in several JVM languages, however only the Nas
 3. The Value for that row is a listing of colon-separated entries of the Java extension directories.
   * Experimentation has shown that the language jar file can be installed in any of the directories listed, however not all of them may be accessible to the user.
 
-The rules provided in the example template (*insumRules.xml*) are written using Groovy. Groovy was chosen for its concise syntax, ease of use and abundant documentation. To enable the Groovy Scripting Engine for SDDM:
+To enable the Groovy Scripting Engine for SDDM:
 
-1. Go to the [Groovy Download](http://groovy-lang.org/download.html) page and select the binary to download.
+1. Go to the [Groovy Download](http://groovy-lang.org/download.html) page and find the "2.4.15 distributions" section.
+1. Download the "SDK bundle" and unpack it.
 1. Go to the download location and open the *groovy-version* directory, and then the *embeddable* subdirectory.
-1.	Copy the file *groovy-all-version.jar* to one of the java extension directories listed.
+1.	Copy the file *groovy-all-2.4.15.jar* to one of the java extension directories listed.
 2.	Restart SDDM.
 
 As an added bonus, SQLcl will also be Groovified!
